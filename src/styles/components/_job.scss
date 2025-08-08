@@ -8,13 +8,13 @@
     color: $heading-color-default;
   }
   &-description {
-    // padding: 2rem;
+    padding: 1rem 0;
     // &:not(:last-child) {
     //   border-bottom: 1px solid $color-primary-800;
     // }
-    &_brackets {
-      color: #f6c844;
-    }
+    // &_brackets {
+    //   color: #f6c844;
+    // }
     &_parentheses {
       color: #4a9df8;
     }
