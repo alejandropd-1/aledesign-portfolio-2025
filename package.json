@@ -1,0 +1,22 @@
+{
+  "name": "aledesign-portfolio-2025",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^4.16.18",
+    "eslint-config-wesbos": "^4.3.2",
+    "postcss-preset-env": "^10.2.4",
+    "vite-plugin-html-purgecss": "^0.1.1"
+  },
+  "devDependencies": {
+    "sass": "^1.90.0"
+  }
+}

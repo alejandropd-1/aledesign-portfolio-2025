@@ -1,0 +1,16 @@
+#!/bin/bash
+# Script para copiar los archivos SASS al nuevo proyecto
+
+echo "Este script copiará todos los archivos SASS del proyecto Vite al nuevo proyecto Astro"
+echo "Por favor, ejecuta los siguientes comandos en tu terminal:"
+echo ""
+echo "# En Windows PowerShell o CMD:"
+echo "xcopy /E /I C:\\www\\aledesign\\sass C:\\www\\aledesign-portfolio-2025\\src\\styles"
+echo ""
+echo "# O si prefieres copiar manualmente:"
+echo "Copia toda la carpeta 'sass' desde:"
+echo "  C:\\www\\aledesign\\sass"
+echo "A:"
+echo "  C:\\www\\aledesign-portfolio-2025\\src\\styles"
+echo ""
+echo "Mantén la misma estructura de carpetas (abstracts, base, components, layout, utilities)"
