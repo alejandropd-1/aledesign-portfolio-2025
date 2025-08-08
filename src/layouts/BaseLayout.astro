@@ -1,0 +1,133 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Alejandro Delgado Portfolio",
+  description = "Alejandro Delgado UI/UX Web Designer Portfolio",
+  keywords = "FIGMA, Adobe XD, Mockeup, Wireframing, Web Design, Development, Diseño Web, Maquetado y Desarrollo Web, UI, UX",
+  ogImage = "https://www.aledesign.dev/images/aledesign-avatar.png",
+} = Astro.props;
+
+const siteUrl = Astro.site || "https://www.aledesign.dev";
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+    <meta property="twitter:site" content="@alejandropd_1" />
+    <meta property="twitter:creator" content="@alejandropd_1" />
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Alejandro Delgado",
+        "jobTitle": "UX/UI Web Designer",
+        "url": "{siteUrl}",
+        "sameAs": [
+          "https://www.linkedin.com/in/alejandropdelgado/",
+          "https://github.com/alejandropd-1",
+          "https://www.youtube.com/@alejandropd_1",
+          "https://mastodon.social/@alejandropd",
+          "https://bsky.app/profile/aledesign.dev"
+        ],
+        "email": "apdelgado@gmail.com",
+        "telephone": "+541160513261",
+        "image": "{ogImage}",
+        "description": "{description}"
+      }
+    </script>
+
+    <!-- SASS Styles -->
+    <link rel="stylesheet" href="/src/styles/main.scss" />
+
+    <!-- FontAwesome -->
+    <script
+      src="https://kit.fontawesome.com/e0025567be.js"
+      crossorigin="anonymous"
+      is:inline></script>
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-JGHRGD2X1R"
+      is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-JGHRGD2X1R");
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KNVXGZVD");
+    </script>
+
+    <!-- Cookiebot -->
+    <script
+      id="Cookiebot"
+      src="https://consent.cookiebot.com/uc.js"
+      data-cbid="074a6ccd-5d9d-41e4-bf3b-1dd463bf4e0c"
+      type="text/javascript"
+      async
+      is:inline></script>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KNVXGZVD"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      >
+      </iframe>
+    </noscript>
+
+    <slot />
+  </body>
+</html>

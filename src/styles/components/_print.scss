@@ -1,0 +1,18 @@
+@media print {
+  .banner-image {
+    img {
+      display: none; /* hide image */
+    }
+  }
+  .banner-special-contact {
+    display: block; /* show special contact */
+  }
+  .banner-text-description {
+    padding: 0;
+    background-image: none;
+    &::before,
+    &::after {
+      background-image: none;
+    }
+  }
+}

@@ -1,0 +1,67 @@
+---
+// Job Component - Muestra un trabajo individual
+export interface Props {
+  title: string;
+  category?: string;
+  place: string;
+  type: string;
+  period: string;
+  tags: string[];
+  tasks: string[];
+}
+
+const { title, category, place, type, period, tags, tasks } = Astro.props;
+
+// Determinar la clase CSS según la categoría
+const categoryClass =
+  category === "marketing" || category === "management"
+    ? "margin-block-start-8 margin-block-start-10"
+    : "padding-block-2";
+---
+
+<div class="job-section">
+  {category !== "design" && <h3 class="job-title {categoryClass}">{title}</h3>}
+
+  <div
+    class="job-description {category === 'design' ? 'padding-block-2' : 'padding-block-8'}"
+  >
+    {
+      category === "design" && (
+        <h3 class="job-title margin-block-end-4">{title}</h3>
+      )
+    }
+
+    <p>
+      <span class="job-label">Place = </span>
+      <span class="job-place">{place}</span>;
+    </p>
+
+    <p>
+      <span class="job-label">Type = </span>
+      {type};
+    </p>
+
+    <p>
+      <span class="job-label">Period = </span>
+      {period};
+    </p>
+
+    <p>
+      <span class="job-label">Tags = </span>
+      <span class="job-tags">{tags.join(", ")}</span>;
+    </p>
+
+    <div>
+      <ul>
+        <span class="job-label">Tasks = </span>
+        <span class="job-description_parentheses">(</span>
+        <span class="job-description_brackets"
+          >{}
+          {tasks.map((task) => <li>{task}</li>)}
+        </span>
+        <span class="job-description_brackets"></span>
+      </ul>
+      <span class="job-description_parentheses">)</span>;
+    </div>
+  </div>
+</div>

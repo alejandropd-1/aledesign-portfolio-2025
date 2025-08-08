@@ -1,0 +1,37 @@
+@use "../abstracts" as *;
+
+.job {
+  // border-radius: 2rem;
+  &-title {
+    font-size: $heading-3-font-size;
+    font-weight: $heading-font-weight;
+    color: $heading-color-default;
+  }
+  &-description {
+    // padding: 2rem;
+    // &:not(:last-child) {
+    //   border-bottom: 1px solid $color-primary-800;
+    // }
+    &_brackets {
+      color: #f6c844;
+    }
+    &_parentheses {
+      color: #4a9df8;
+    }
+    ul {
+      li {
+        margin-left: 1rem;
+      }
+    }
+  }
+  &-label {
+    color: #f6c844;
+  }
+  &-tags {
+    color: #b9fd97;
+    font-size: 0.8rem;
+  }
+  &-place {
+    font-weight: 500;
+  }
+}

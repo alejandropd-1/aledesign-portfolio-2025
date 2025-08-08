@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Job from '../components/Job.astro';
+
+// Obtener todos los trabajos publicados
+const jobs = await getCollection('jobs', ({ data }) => {
+  return data.status === 'published';
+});
+
+// Ordenar por el campo 'order'
+const sortedJobs = jobs.sort((a, b) => a.data.order - b.data.order);
+
+// Agrupar trabajos por categoría
+const designJobs = sortedJobs.filter(job => job.data.category === 'design');
+const marketingJobs = sortedJobs.filter(job => job.data.category === 'marketing');
+const managementJobs = sortedJobs.filter(job => job.data.category === 'management');
+
+// Función para extraer las tareas del contenido markdown
+function extractTasks(content: string): string[] {
+  const lines = content.split('\n');
+  return lines
+    .filter(line => line.trim().startsWith('- '))
+    .map(line => line.replace(/^- /, '').trim());
+}
+---
+
+<BaseLayout 
+  title="Alejandro Delgado - UX/UI Web Designer Portfolio"
+  description="UX/UI designer with over 14 years of experience in e-commerce, pharmaceutical and National industry projects. Expert in Figma, Adobe XD, HTML, CSS, SASS and JavaScript."
+>
+  <main>
+    <div class="container">
+      <Header />
+      
+      <div class="section padding-block-start-10">
+        <!-- Trabajos de diseño -->
+        {designJobs.length > 0 && (
+          <>
+            <h3 class="job-title margin-block-end-4">UX/UI Web Designer</h3>
+            {designJobs.map(job => (
+              <Job 
+                title={job.data.title}
+                category={job.data.category}
+                place={job.data.place}
+                type={job.data.type}
+                period={job.data.period}
+                tags={job.data.tags}
+                tasks={extractTasks(job.body)}
+              />
+            ))}
+          </>
+        )}
+        
+        <!-- Trabajos de marketing -->
+        {marketingJobs.map(job => (
+          <Job 
+            title={job.data.title}
+            category={job.data.category}
+            place={job.data.place}
+            type={job.data.type}
+            period={job.data.period}
+            tags={job.data.tags}
+            tasks={extractTasks(job.body)}
+          />
+        ))}
+        
+        <!-- Trabajos de gestión -->
+        {managementJobs.map(job => (
+          <Job 
+            title={job.data.title}
+            category={job.data.category}
+            place={job.data.place}
+            type={job.data.type}
+            period={job.data.period}
+            tags={job.data.tags}
+            tasks={extractTasks(job.body)}
+          />
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
