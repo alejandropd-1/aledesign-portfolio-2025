@@ -1,0 +1,6 @@
+---
+// Componente para manejar los estilos globales
+---
+
+<!-- Este componente importa los estilos globales -->
+<link rel="stylesheet" href="/src/styles/main.scss" />

@@ -1,0 +1,20 @@
+// Este archivo es el punto de entrada principal para todos los estilos
+// Usa @forward para re-exportar todos los módulos
+
+// 1. Abstracts (variables, mixins, functions) - deben ir primero
+@forward "abstracts";
+
+// 2. Base (reset, tipografía base, etc.)
+@forward "base";
+
+// 3. Layout (grid, containers, etc.)
+@forward "layout";
+
+// 4. Components (componentes específicos)
+@forward "components";
+
+// 5. Utilities (clases utilitarias)
+@forward "utilities";
+
+// 6. Vendor (librerías externas)
+@forward "vendor";
