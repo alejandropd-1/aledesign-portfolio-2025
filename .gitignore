@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# deleted files backup
+.deleted/
+
 # dependencies
 node_modules/
 
