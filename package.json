@@ -12,15 +12,13 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
     "astro": "^4.16.18",
-    "eslint-config-wesbos": "^4.3.2",
-    "vite-plugin-html-purgecss": "^0.1.1"
-  },
-  "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^7.0.2",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.0",
-    "lightningcss": "^1.30.1",
+    "eslint-config-wesbos": "^4.3.2",
     "postcss-preset-env": "^10.2.4",
     "sass": "^1.90.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
   }
 }
