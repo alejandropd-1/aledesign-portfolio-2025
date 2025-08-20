@@ -9,6 +9,8 @@ order: 5
 status: "published"
 ---
 
-- Implementation of Agile methodologies, with a focus on Kanban architecture.
-- Use of tools such as Microsoft Planner, Teams, and SharePoint to coordinate and manage projects.
-- User permission control for accessing relevant files on the server.
+<ul>
+<li> Implementation of Agile methodologies, with a focus on Kanban architecture.</li>
+<li> Use of tools such as Microsoft Planner, Teams, and SharePoint to coordinate and manage projects.</li>
+<li> User permission control for accessing relevant files on the server.</li>
+</ul>

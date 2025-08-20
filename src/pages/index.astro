@@ -12,12 +12,23 @@ const jobs = await getCollection('jobs', ({ data }) => {
 // Ordenar por el campo 'order'
 const sortedJobs = jobs.sort((a, b) => a.data.order - b.data.order);
 
-// Agrupar trabajos por categoría
-const designJobs = sortedJobs.filter(job => job.data.category === 'design');
-const marketingJobs = sortedJobs.filter(job => job.data.category === 'marketing');
-const managementJobs = sortedJobs.filter(job => job.data.category === 'management');
+// Renderizar el contenido markdown para cada job
+const jobsWithContent = await Promise.all(
+  sortedJobs.map(async (job) => {
+    const { Content } = await job.render();
+    return {
+      ...job,
+      Content
+    };
+  })
+);
 
-// Función para extraer las tareas del contenido markdown
+// Agrupar trabajos por categoría (usando jobsWithContent)
+const designJobs = jobsWithContent.filter(job => job.data.category === 'design');
+const marketingJobs = jobsWithContent.filter(job => job.data.category === 'marketing');
+const managementJobs = jobsWithContent.filter(job => job.data.category === 'management');
+
+// Función para extraer las tareas del contenido markdown (fallback)
 function extractTasks(content: string): string[] {
   const lines = content.split('\n');
   return lines
@@ -47,7 +58,7 @@ function extractTasks(content: string): string[] {
                 type={job.data.type}
                 period={job.data.period}
                 tags={job.data.tags}
-                tasks={extractTasks(job.body)}
+                content={job.Content}
               />
             ))}
           </>
@@ -62,7 +73,7 @@ function extractTasks(content: string): string[] {
             type={job.data.type}
             period={job.data.period}
             tags={job.data.tags}
-            tasks={extractTasks(job.body)}
+            content={job.Content}
           />
         ))}
         
@@ -75,7 +86,7 @@ function extractTasks(content: string): string[] {
             type={job.data.type}
             period={job.data.period}
             tags={job.data.tags}
-            tasks={extractTasks(job.body)}
+            content={job.Content}
           />
         ))}
       </div>

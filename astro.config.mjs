@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import postcssPresetEnv from 'postcss-preset-env';
+import gzipPlugin from 'rollup-plugin-gzip';
 
 // ============================================
 // PANEL DE CONTROL DE LA COMPILACIÓN (BUILD)
@@ -59,12 +60,37 @@ export default defineConfig({
         build: {
             // Le decimos a Vite si debe minificar o no, según tu elección en OPCIONES_BUILD.
             minify: OPCIONES_BUILD.minificarCSS,
+            // Pre-compresión gzip
+            reportCompressedSize: true,
             rollupOptions: {
                 output: {
-                    // Le decimos a Vite cómo nombrar el archivo CSS final.
-                    assetFileNames: `assets/${OPCIONES_BUILD.nombreArchivoCSS}`,
+                    // CSS va a assets/app.css
+                    assetFileNames: (assetInfo) => {
+                        if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+                            return `assets/${OPCIONES_BUILD.nombreArchivoCSS}`;
+                        }
+                        // Imágenes van a assets/images/
+                        if (
+                            assetInfo.name &&
+                            /\.(png|jpe?g|svg|gif|webp)$/i.test(assetInfo.name)
+                        ) {
+                            return 'assets/images/[name]_[hash][extname]';
+                        }
+                        return 'assets/[name]_[hash][extname]';
+                    },
+                    // // Minimizar JS chunks (solo lo esencial)
+                    // chunkFileNames: 'assets/js/[name]_[hash].js',
+                    // entryFileNames: 'assets/js/[name]_[hash].js',
+                    // manualChunks: undefined, // Evita chunks innecesarios
                 },
             },
+            // Plugins para compresión
+            plugins: [
+                gzipPlugin({
+                    filter: /\.(js|css|html|svg)$/,
+                    threshold: 1024, // Solo archivos >1KB
+                })
+            ],
         },
         css: {
             // Aquí le pasamos a Vite la lista de herramientas para CSS que preparamos antes.
@@ -80,9 +106,21 @@ export default defineConfig({
         },
     },
 
+    // Configuración de optimización de imágenes
+    image: {
+        service: {
+            entrypoint: 'astro/assets/services/sharp',
+        },
+    },
+
     // Configuración de la compilación (build) de Astro.
     build: {
         // Esto fuerza a que el CSS siempre esté en un archivo separado (app.css).
         inlineStylesheets: 'never',
+        // Dividir en menos chunks
+        split: false,
     },
+
+    // Configuración de salida para sitio completamente estático
+    output: 'static',
 });

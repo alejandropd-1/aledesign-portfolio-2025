@@ -10,13 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.2.1",
-    "astro": "^4.16.18",
+    "@astrojs/sitemap": "^3.5.0",
+    "astro": "^5.13.2",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.0",
     "eslint-config-wesbos": "^4.3.2",
     "postcss-preset-env": "^10.2.4",
-    "sass": "^1.90.0"
+    "rollup-plugin-gzip": "^4.1.1",
+    "sass": "^1.90.0",
+    "sharp": "^0.34.3"
   },
   "devDependencies": {
     "prettier": "^3.6.2"

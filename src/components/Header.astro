@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import aledesignAvatar from "../assets/images/aledesign-avatar.webp";
 // Header Component - Contiene la información principal del portfolio
 ---
 
@@ -11,8 +13,16 @@
       <h2>Web Designer</h2>
     </div>
     <div class="banner-image">
-      <img src="/images/aledesign-avatar.webp" alt="Alejandro Delgado - UX/UI Web Designer" />
+      <Image
+        src={aledesignAvatar}
+        alt="Alejandro Delgado - UX/UI Web Designer"
+        width={512}
+        quality={90}
+        format="webp"
+        loading="eager"
+      />
     </div>
+
   </div>
 
   <div class="banner-social">

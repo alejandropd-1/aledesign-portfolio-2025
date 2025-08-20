@@ -1,0 +1,39 @@
+---
+// Componente para imágenes optimizadas con Astro
+import { Image } from 'astro:assets';
+
+export interface Props {
+  src: ImageMetadata;
+  alt: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  format?: 'webp' | 'avif' | 'png' | 'jpg' | 'jpeg';
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  width = 800, 
+  height = 600, 
+  quality = 85,
+  format = 'webp',
+  loading = 'lazy',
+  class: className,
+  ...rest 
+} = Astro.props;
+---
+
+<Image
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  quality={quality}
+  format={format}
+  loading={loading}
+  class={className}
+  {...rest}
+/>

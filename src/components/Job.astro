@@ -7,10 +7,11 @@ export interface Props {
   type: string;
   period: string;
   tags: string[];
-  tasks: string[];
+  tasks?: string[];
+  content?: any; // Componente renderizado de Astro
 }
 
-const { title, category, place, type, period, tags, tasks } = Astro.props;
+const { title, category, place, type, period, tags, tasks, content: Content } = Astro.props;
 
 // Determinar la clase CSS según la categoría
 const categoryClass =
@@ -52,15 +53,17 @@ const categoryClass =
     </p>
 
     <div>
-      <ul>
-        <span class="job-label">Tasks = </span>
-        <span class="job-description_parentheses">(</span>
-        <span class="job-description_brackets"
-          >{}
-          {tasks.map((task) => <li>{task}</li>)}
-        </span>
-        <span class="job-description_brackets"></span>
-      </ul>
+      <span class="job-label">Tasks = </span>
+      <span class="job-description_parentheses">(</span>
+      <div class="job-description_brackets">
+        {Content ? (
+          <Content />
+        ) : tasks ? (
+          <ul>
+            {tasks.map((task) => <li>{task}</li>)}
+          </ul>
+        ) : null}
+      </div>
       <span class="job-description_parentheses">)</span>;
     </div>
   </div>

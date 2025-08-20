@@ -303,4 +303,45 @@ minifyCSS: true
 
 ---
 
-*Última actualización: 11 de Agosto de 2025*
+## 📝 Actualización: 20 de Agosto de 2025 - Corrección de Imagen Estirada
+
+### Problema identificado:
+La imagen del avatar en `src/components/Header.astro` se mostraba estirada, perdiendo su relación de aspecto original.
+
+### Solución implementada:
+Se agregaron estilos CSS específicos en `src/styles/components/_banner.scss` dentro de la clase `.banner-image`:
+
+```scss
+&-image {
+  margin-left: 2.5rem;
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-width: 100%;
+  }
+  @include mq(medium) {
+    position: absolute;
+    top: auto;
+    bottom: 15%;
+    right: 3%;
+    width: 45%;
+    height: auto;
+    margin-left: 0;
+  }
+}
+```
+
+### Cambios técnicos:
+- **`width: 100%`** - La imagen ocupa todo el ancho disponible del contenedor
+- **`height: auto`** - Mantiene la proporción original automáticamente
+- **`object-fit: contain`** - Preserva la relación de aspecto sin estirar la imagen
+- **`max-width: 100%`** - Previene desbordamiento del contenedor
+
+### Resultado:
+✅ La imagen del avatar ahora mantiene su relación de aspecto correcta sin distorsión
+✅ Responsive design preservado en todas las resoluciones
+
+---
+
+*Última actualización: 20 de Agosto de 2025*
